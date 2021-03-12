@@ -1,0 +1,28 @@
+For convex optimization in our algorithm, we used CVX~\cite{grant2008cvx}, a package for specifying and solving convex programs.
+\begin{example}
+% We consider a sampled data system taken from~\cite{hetel2013stabilization}, where $A_s = \mymatrix{0 & 1\\ -2 & 0.1}$, $B = \mymatrix{0 \\ 1}$, $A_u = \mymatrix{0 & 0}$, $B_u = 0$ and $F_c = \mymatrix{1 & 0}$.  
+Let us consider the system described in Example~\ref{eg:counterintuitive} in Section~\ref{sec:problem}.
+\end{example}
+Without past sample based feedback,~\cite{al2015stability} has shown this system is stable for sampling times in $\sqb{0.4,1.888}$, but unstable for $\ub\geq 1.889$.  We want to exponentially stabilize the system for a large $\ub>1.889$, given $\lb = 0.4$ and $\lambda = 0.9999$, using previous sample based feedback at appropriate sampling period $\theta$.  However, if we set a matching feedback $F_p = F_s\exp\rb{A_c\cdot 1.888}$ at $\theta = 1.888$, the system is unstable for $\ub\geq 2.088$.  This is because $\R{1.9}\cdot\R{0.4} = A_r\exp\rb{1.888\cdot A_c}A_r\exp\rb{0.2\cdot A_c}A_r\exp\rb{0.4\cdot A_c}$ has eigenvalues outside unit complex circle.  Therefore, we can not increase the sampling time range of stability by a large value by using a matching feedback input as above.  On the other hand, our algorithm does increase the sampling time range of stability by a large value $\ub = 3.42$ as given in the following result.
+
+\emph{Settings}. We took $K = 2$, $\eta = 0.01$ and $\epsilon = 0.01$.
+
+\emph{Result}.  For $\ub = 3.42$, our algorithm found $F_p = \mymatrix{0.1422 &   0.4669  &  0.1417}$ at $\theta = 1.81$ to $\lambda$-exponentially stabilize the system.  
+
+\begin{example}
+We consider a sampled data system taken from~\cite{hetel2017recent}, where $A_s = \mymatrix{1 & 3\\ 2 & 1}$, $B = \mymatrix{1 \\ 0.6}$, $A_u = \mymatrix{0 & 0}$, $B_u = 0$ and $F_c = \mymatrix{-1 & -6}$.  
+\end{example}
+Without past sample based feedback, given $\tau_{min} = 0.18$, the system is shown in~\cite{hetel2017recent} to be unstable for $\tau_{max}\geq 0.54$.  Given $\lambda = 0.999$, we want to $\lambda$-exponentially stabilize the system for a large $\tau_{max}> 0.54$. 
+
+\emph{Settings}. We took $K = 2$, $\eta = 0.01$ and $\epsilon = 0.01$.
+
+\emph{Result}.   For $\ub = 0.8$, our algorithm found $F_p = \mymatrix{-10.5819  &  1.7823 &  -2.5906}$ at $\theta = 0.49$ to exponentially stabilize the system.  
+
+\begin{example}
+We consider a sampled data system taken from~\cite{hetel2013stabilization}, where $A_s = \mymatrix{0 & -3\\ 1.4 & -2.6}$, $B = \mymatrix{1 \\ 0.6}$, $A_u = \mymatrix{8.4 -18.6}$, $B_u = 4.6$ and $F_c = \mymatrix{0 & 0}$.  
+\end{example}
+Without past sample based feedback, given $\tau_{min} = 0.1$, the system is shown in~\cite{al2015stability} to be unstable for $\tau_{max}\geq 0.515$.  Given $\lambda = 0.99$, we want to $\lambda$-exponentially stabilize the system for a large $\tau_{max}> 0.515$ by finding a suitable $F_p$ and $\theta$.
+
+\emph{Settings}. We took $K = 2$, $\eta = 0.001$ and $\epsilon = 0.001$.
+
+\emph{Result}.   For $\ub = 0.86$, our algorithm found $F_p = {10^{-8}\cdot\mymatrix{0.1667 &  -0.0259 &   0.0561}}$ at $\theta = 0.48$ to exponentially stabilize the system.

@@ -1,0 +1,47 @@
+We consider a sampled data linear time invariant (LTI) system  defined as follows. The state of the system at time $t\in[0,\infty)$ is $\state{t}\in\reals^n$, the feedback input  is $\inp{t}\in\reals^m$, $\lb$ and $\ub$ are lower and upper bounds, respectively, on feedback sampling period, $A_s\in\reals^{n\times n}$, $B_s\in\reals^{n\times m}$, $A_u\in\reals^{m\times n}$, $B_u\in\reals^{m\times m}$, $F_p\in\reals^{m\times (n+m)}$ and $F_c\in\reals^{m\times n}$ are real matrices related to the system dynamics described below. The matrix $F_c$ acts on the current sample and $F_c$ acts on previous sample and input.  The value $\theta$ is the time at which $F_p$ is applied on the previous sample to reset the feedback input.  But we apply the feedback  at most once between successive state sampling.  Allowing multiple such historical feedbacks between successive state samples makes the stabilization problem more difficult, which is beyond the scope of this paper.  Henceforth, we take $\theta\geq\rb{\ub+\lb}/2$ so that the feedback based on previous sample is applied at most once between successive state sampling.
+%
+\begin{align*}
+    & \theta \geq \rb{\ub+\lb}/2\\
+    & \exists \rb{t_k}_{k=0}^\infty,~\forall k\in\integers_{\geq 0} ~t_k\in\reals_{\geq 0}\\
+    & \forall t\notin\bigcup_{k=0}^\infty\rb{ \set{t_k}\bigcup \set{t_k+\theta\st{ t_k+\theta< t_{k+1} } } },\\
+    &\der{\state{t}} = A_s\state{t} + B_s{\inp{t}},~~\der{{\inp{t}}} = A_u\state{t} + B_u{\inp{t}}~\numberthis\label{eqn:ncsstart}\\
+    & \forall k\in\integers_{\geq 0},
+     \rb{t_{k+1}-t_k}\in[\lb,\ub],~t_0 = 0,\\
+    & \inp{t_k} = F_c\state{t_k}^-~\numberthis\\
+    &~\text{If}~\theta<\rb{t_{k+1}-t_k},~\text{then}~\inp{\rb{t_k+\theta}} = F_p\mymatrix{\state{t_k}\\\inp{t_k}}~\numberthis\label{eqn:ncsend}.
+\end{align*}
+%
+We denote the combined vector of the state of the system and controller input (combined state) at any time $t$ as $\cs{t} = \mymatrix{\state{t}^T,\inp{t}^T}^T$.  We call a sequence of combined states at sampling times $\rb{\cs{t_k}}_{k=0}^\infty$ as a sampling time trajectory which, by simple manipulation of the above equations, can be shown to be equivalently governed by the following dynamics.
+%
+\begin{align*}
+    & A_r = \mymatrix{\identity{n} & 0\\ F_c & 0},~~H = \mymatrix{\identity{n} ~~~~ 0\\ F_p\exp\rb{-Ac\cdot\theta} },\\
+    & A_c = \mymatrix{A_s & B_s \\ A_u & B_u}.~\numberthis\label{eqn:impulse}\\
+    & \cs{t_{k+1}} = \R{\rb{t_{k+1}-t_k}}\cs{t_k}~~\text{where}\\
+    & \forall \tau\in[\lb,\lb+\theta],~\R{\tau} = A_r\exp\rb{A_c\tau}.~\numberthis\label{eqn:action1}\\
+    & \forall \tau\in(\lb+\theta,\ub],~\text{as}~\theta\geq\rb{\ub+\lb}/2, \\
+    & \R{\tau} = A_r*\exp\rb{\tau-\lb-\theta}*H*\exp\rb{A_c\rb{\lb+\theta}}.~\numberthis\label{eqn:action2}
+\end{align*}
+%
+\begin{definition}[Exponential stability]
+The system is said to be $\lambda$-exponentially stable for $\lambda\in[0,1)$ if there exists $r\in\reals_{\geq 0}$ such that for every sequence of sampling times $\rb{t_k}_{k=0}^\infty$, the following is true.
+%
+\begin{align*}
+    & \norm{\cs{t_k}}\leq r\lambda^k\norm{\cs{0}} ~\numberthis\label{eqn:expstability}
+\end{align*}
+%
+\end{definition}
+%
+\begin{problem}
+We are given $\lambda\in[0,1)$, $\lb$, $\ub$, $A_s$, $B_s$, $A_u$, $B_u$ and $F_c$ such that the matrix $\R{\lb}$ is Schur.  Find a feedback matrix  $F_p$ acting on previous sample and input and find a $\theta\in\sqb{\rb{\ub+\lb}/2, \ub}$ such that the system is $\lambda$-exponentially stable.
+\end{problem}
+%
+\begin{remark}  Let us consider that a system is be stable for sampling times between $\sqb{\lb,\mu}$ without historical feedback.  We wish to stabilize the system for a large $\ub>\mu$ applying feedback based on previous sample.  The expected sampling time feedback at a time $\rb{t_k+\mu}$ is ${F_c\cdot \state{\rb{t_k+\mu}}}$.  As a function of the previous sample $\state{t_k}$, this feedback is $F_c\exp\rb{A_c\mu}\state{t_k}$.  So, when the sample information is missing at $\rb{t_k+\mu}$, it may seem intuitive to apply feedback $F_c\exp\rb{A_c\mu}\state{t_k}$ at $\mu$ to stabilize the system.   However, other values of $F_p$ may lead to far more robust stabilization as illustrated in the below example.
+\end{remark}
+%
+\begin{example}~\label{eg:counterintuitive}
+Let consider the benchmarked sampled data system taken from~\cite{hetel2013stabilization,al2015stability}, where $A_s = \mymatrix{0 & 1\\ -2 & 0.1}$, $B = \mymatrix{0 \\ 1}$, $A_u = \mymatrix{0 & 0}$, $B_u = 0$ and $F_c = \mymatrix{1 & 0}$.  
+%
+Without previous sample based feedback,~\cite{al2015stability} has shown this system is stable for sampling times in $\sqb{0.4,1.888}$, but unstable for $\ub\geq 1.889$.  If we set a matching feedback $F_p = F_s\exp\rb{A_c\cdot 1.888}$ at $\theta = 1.888$, the system is unstable for $\ub\geq 2.0888$.  This is because $\R{1.9}\cdot\R{0.4} = A_r\exp\rb{1.888\cdot A_c}A_r\exp\rb{0.2\cdot A_c}A_r\exp\rb{0.4\cdot A_c}$ has eigenvalues outside unit complex circle.  However, using $F_p = \mymatrix{0.1422 &   0.4669  &  0.1417}$  at $\theta = 0.81$, we can stabilize the system for a far larger value $\ub = 3.42$ which we deduce later in this paper.  This shows that the matching time evolution based feedback $F_p = F_c\exp\rb{A_c\mu}$ at some $\mu$ need not be an efficient solution.  Moreover, there is no guarantee that such feedback will stabilize the system.
+\end{example}
+
+Instead, we shall describe a stabilization method using complex zonotopes, which stabilizes the system for large uncertainties in the sampling period on benchmark examples.
