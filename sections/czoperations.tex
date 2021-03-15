@@ -34,9 +34,10 @@ Let us consider a complex zonotope $\cz{P}{c}{s}$ and a real matrix $A$.  Then t
 The lemma is proved in~\cite{adimoolam2018calculus}.
 \end{proof}
 %
-The algorithm we propose later to stabilize the system involves checking inclusion of a set of complex zonotopes, obtained by applying a sequence of transformations, inside another original complex zonotope (see Lemma~\ref{lem:invstability}).  In this regard, we define a set of complex zonotopes whose templates lie in the neighborhood of a given template as follows.  Let us consider a real matrix with positive entries $\Upsilon\in\reals_{\geq 0}^{\rows{Q}\times\cols{Q}}$ where $Q$ is a complex matrix and a real vector $\rho\in\reals^{\cols{e}}$ where $e$ is a real vector.  
+The algorithm we propose later to stabilize the system involves checking inclusion of a set of complex zonotopes, obtained by applying a sequence of transformations, inside another original complex zonotope (see Lemma~\ref{lem:invstability}).  In this regard, we define a set of complex zonotopes whose templates lie in the neighborhood of a given template as follows.  Let us consider a real matrix with positive entries $\Upsilon\in\reals_{\geq 0}^{\rows{Q}\times\cols{Q}}$ where $Q$ is a complex matrix and a real vector $\rho\in\reals^{\cols{e}}$ where $e$ is a real vector.  Then we use the following notation.
 %
 \begin{align*}
+    & Q\errplus\Upsilon = \set{Q+\widehat{Q}\st{\abs{Q}\leq \Upsilon}},~~e\errplus\Upsilon = \set{e+u\st{\abs{u}\leq \rho}}\\
     & \cz{Q\errplus\Upsilon}{e\errplus\rho}{r} \\
     & = \set{\cz{Q+\widehat{Q}}{e+u}{r}~\st{\abs{Q}\leq \Upsilon,~\abs{u}\leq \rho}}
 \end{align*}
