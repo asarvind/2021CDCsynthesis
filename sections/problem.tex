@@ -8,7 +8,7 @@ We consider a sampled data linear time invariant (LTI) system  defined as follow
     & \forall k\in\integers_{\geq 0},
      \rb{t_{k+1}-t_k}\in[\lb,\ub],~t_0 = 0,\\
     & \inp{t_k} = F_c\state{t_k}^-~\numberthis\\
-    &~\text{If}~\theta<\rb{t_{k+1}-t_k},~\text{then}~\inp{\rb{t_k+\theta}} = F_p\mymatrix{\state{t_k}\\\inp{t_k}}~\numberthis\label{eqn:ncsend}.
+    &~\text{If}~\theta<\rb{t_{k+1}-t_k},~\text{then}~\inp{\rb{t_k+\theta}} = F_p\mymatrix{\state{t_k}^-\\\inp{t_k}^-}~\numberthis\label{eqn:ncsend}.
 \end{align*}
 %
 We denote the combined vector of the state of the system and controller input (combined state) at any time $t$ as $\cs{t} = \mymatrix{\state{t}^T,\inp{t}^T}^T$.  We call a sequence of combined states at sampling times $\rb{\cs{t_k}}_{k=0}^\infty$ as a sampling time trajectory which, by simple manipulation of the above equations, can be shown to be equivalently governed by the following dynamics.
