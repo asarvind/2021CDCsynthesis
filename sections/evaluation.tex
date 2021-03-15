@@ -36,7 +36,7 @@ Without past sample based feedback,~\cite{al2015stability} has shown this system
 
 \emph{Result}.  For $\ub = 3.42$, our algorithm found $F_p = \mymatrix{0.1422 &   0.4669  &  0.1417}$ with $\theta = 1.41$ to exponentially stabilize the system.  
 
-\begin{example}~\label{eg:net}
+\begin{example}
 We consider a sampled data system taken from~\cite{hetel2017recent}, where $A_s = \mymatrix{1 & 3\\ 2 & 1}$, $B_s = \mymatrix{1 \\ 0.6}$, $A_u = \mymatrix{0 & 0}$, $B_u = 0$ and $F_c = \mymatrix{-1 & -6}$.  
 \end{example}
 Without past sample based feedback, given $\tau_{min} = 0.18$, the system is shown in~\cite{hetel2017recent} to be unstable for $\tau_{max}\geq 0.54$.  Given $\lambda = 0.999$, we want to $\lambda$-exponentially stabilize the system for a large $\tau_{max}> 0.54$. 
@@ -54,7 +54,7 @@ Without past sample based feedback, given $\tau_{min} = 0.1$, the system is show
 
 \emph{Result}.   For $\ub = 0.86$, our algorithm found $F_p = \mymatrix{0.0972 &  -0.0056  &  0.0085}$ with $\theta = 0.38$ to exponentially stabilize the system.
 
-\begin{example}
+\begin{example}~\label{eg:net}
 This example is adapted from the example of a networked platoon of
 vehicles given in~\cite{makhlouf2014networked}, where the state space
 is $9$-dimensional and the sampled input is $2$-dimensional.  The
