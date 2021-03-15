@@ -19,8 +19,8 @@ Let us consider a complex matrix $P\in\cnums^{(n+m)\times l}$ and $\epsilon>0$. 
     & H = \mymatrix{\identity{n} ~~~~ 0\\ F_p\exp\rb{-A_c\rb{\lb+\theta}} }~\numberthis\label{eqn:incbegin}\\
     & \forall i\in\integers_{\geq 0}: \epsilon\myempty i<\theta, \\
     & M_i = A_r\myempty\exp\rb{A_c\rb{\lb+i\myempty\epsilon}},~ \overline{M}_i = M_i\rb{\identity{n+m}+A_c\myempty\epsilon}~\numberthis\\
-    & \cz{M_i\errplus \rb{\absolute{M_i}\absolute{A_c}\frac{\epsilon^2}{2}}}{0}{s} \order \cz{\lambda\myempty P}{0}{s}~\numberthis\\
-    & \cz{\overline{M}_i\errplus \rb{\absolute{M_i}\absolute{A_c}\frac{\epsilon^2}{2}}}{0}{s} \order \cz{\lambda\myempty P}{0}{s}~\numberthis\label{eqn:incmid1}\\
+    & \cz{M_iP\errplus \rb{\absolute{M_i}\absolute{A_c}\frac{\epsilon^2}{2}\absolute{P}}}{0}{s} \order \cz{\lambda\myempty P}{0}{s}~\numberthis\\
+    & \cz{\overline{M}_iP\errplus \rb{\absolute{M_i}\absolute{A_c}\frac{\epsilon^2}{2}\absolute{P}}}{0}{s} \order \cz{\lambda\myempty P}{0}{s}~\numberthis\label{eqn:incmid1}\\
     & \forall i\in\integers_{\geq 0}: \epsilon\myempty i\geq\theta, \\
     & M_i = A_r\myempty\exp\rb{A_c\rb{i\epsilon-\theta}}~\numberthis\label{eqn:incmid2}\\
     & \overline{M}_i = M_i\rb{\identity{n+m}+A_c\myempty \epsilon}~\numberthis\\
@@ -42,10 +42,10 @@ Let us consider any $t\in\sqb{\lb,\ub}$.  There exist $i\in\integers_{\geq 0}$ s
 Then based on Lemma~\ref{lem:convhull} and Equations~\ref{eqn:action1},\ref{eqn:action2}, we get that if $i\myempty\epsilon\geq\theta$, then 
 
 \begin{align*}
-\R{t} \subseteq &  \conv{\rb{M_i\myempty H\myempty L}, \rb{\overline{M}_i\myempty H\myempty L}} \\
+\R{t}P \subseteq &  \conv{\rb{M_i\myempty H\myempty L}, \rb{\overline{M}_i\myempty H\myempty L}} \\
  & \errplus \rb{\absolute{M_i}\absolute{A_c}\frac{\epsilon^2}{2}\abs{H\myempty L}}.
 \end{align*}
-Similarly, if $i\myempty\epsilon<\theta$, we get \\ $\R{t}\subseteq \conv{M_i, \overline{M}_i}\errplus \rb{\absolute{M_i}\absolute{A_c}\frac{\epsilon^2}{2}}$.  Then by Equations~(\ref{eqn:incbegin}-\ref{eqn:incend}) and Lemma~\ref{lem:linsum}, we get that $\forall t\in\sqb{\lb,\ub}$, $\R{t}\cz{P}{0}{s}\subseteq \lambda\cz{P}{0}{s}$.  Furthermore by~(\ref{eqn:incunitbox}), we get that $\ball{0}{1}\subseteq \cz{P}{0}{s}$.   Therefore, by Lemma~\ref{lem:invstability}, we get that the system is $\lambda$-exponentially stable.
+Similarly, if $i\myempty\epsilon<\theta$, we get \\ $\R{t}P\subseteq \conv{M_iP, \overline{M}_iP}\errplus \rb{\absolute{M_i}\absolute{A_c}\frac{\epsilon^2}{2}\absolute{P}}$.  Then by Equations~(\ref{eqn:incbegin}-\ref{eqn:incend}) and Lemma~\ref{lem:linsum}, we get that $\forall t\in\sqb{\lb,\ub}$, $\R{t}\cz{P}{0}{s}\subseteq \lambda\cz{P}{0}{s}$.  Furthermore by~(\ref{eqn:incunitbox}), we get that $\ball{0}{1}\subseteq \cz{P}{0}{s}$.   Therefore, by Lemma~\ref{lem:invstability}, we get that the system is $\lambda$-exponentially stable.
 \end{proof}
 %
 \begin{algorithm}[h!]
