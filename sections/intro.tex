@@ -1,0 +1,38 @@
+Sampled data systems are prone to loss of information which can result
+in subsequent inactuation and instability of the system.  In this
+case, we may expect to stabilize the system by applying feedback based
+on information from previous samples.  However, the sampling time can
+be uncertain and time varying in realistic systems, due to which the
+problem of finding appropriate stabilizing feedback based on the
+previous sample becomes challenging.  For instance, the expected
+feedback at the current time instant can be written as a function of
+the previous sample (see Remark~\ref{rem:counterintuitive}).  But
+counterintuitively, such feedback may not effectively stabilize the
+system since the time at which the future sample information becomes
+available is uncertain (\emph{this is explained in
+  Example~\ref{eg:counterintuitive}}).  There can be other historical
+feedbacks which may stabilize the system more robustly, i.e., for
+larger ranges of uncertainty in the sampling time.  Earlier research
+works~\cite{briat2013convex,hetel2013stabilization} have tackled the
+problem of finding stabilizing feedback based on the current sample
+when the sampling time is uncertain.  However, to our knowledge, this
+problem of stabilizing system based on previous sample information
+when the current sample information is missing and the future sampling
+time in uncertain, has not been tacked yet.
+
+In this paper, we come up with an algorithm to find the
+stabilizing feedback based on previous sample when the current sample
+information is missing and the sampling time is uncertain.  To this
+end, we find a novel application of a set representation called
+\emph{complex zonotope}~\cite{adimoolam2018calculus}.  Complex
+zonotope is an extension of real valued zonotopes to complex plane
+which has been earlier applied to verify stability of sampled data
+systems based on its complex valued
+eigenstructure~\cite{adimoolam2016using,adimoolam2017template}.  In
+this paper, we extend the application of complex zonotope to
+synthesize stabilizing feedback acting on previous sample, given range
+of uncertainty in sampling time.  We make use of the possibly complex
+valued eigenstructure of the dynamics to find an candidate complex
+zonotopic invariant for the system and then synthesize the required
+stabilizing feedback acting on the previous sample.
+
