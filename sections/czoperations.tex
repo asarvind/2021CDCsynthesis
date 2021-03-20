@@ -1,4 +1,4 @@
-A simple zonotope introduced in~\cite{girard2005reachability} is a Minkowski sum of line segments in the real euclidean space described as linear combination of real-valued vectors, called generators, with bounded combining coefficients.  However, the eigenstructure of the dynamics, which can be complex valued, is closely related to finding invariants or contractive sets as discussed in~\cite{adimoolam2016using,adimoolam2016template,adimoolam2018calculus} (also see below Theorem~\ref{thm:eig}).  Since real zonotopes can not incorporate complex valued eigenvectors as generators, we extended real zonotopes to complex zonotopes in~\cite{adimoolam2016using,adimoolam2016template,adimoolam2018calculus}.  A complex zonotope is a linear combination of complex-valued vectors with complex combining coefficients bounded inside circles of complex plane.  Complex zonotopes are geometrically more expressive as they can be Minkowski sum of some embedded ellipses in addition to line segments.   They can capture the contraction of of a set along the eigenvectors of the dynamics as stated in Theorem~\ref{thm:eig}.  They are defined below.
+A simple zonotope introduced in~\cite{girard2005reachability} is a Minkowski sum of line segments in the real euclidean space described as linear combination of real-valued vectors, called generators, with bounded combining coefficients.  However, the eigenstructure of the dynamics, which can be complex valued, is closely related to finding invariants or contractive sets as discussed in~\cite{adimoolam2016using,adimoolam2016template,adimoolam2018calculus} (also see below Theorem~\ref{thm:eig}).  Since real zonotopes can not incorporate complex valued eigenvectors as generators, we extended real zonotopes to complex zonotopes in~\cite{adimoolam2016using,adimoolam2016template,adimoolam2018calculus}.  A complex zonotope is a linear combination of complex-valued vectors with complex combining coefficients bounded inside circles of the complex plane.  Complex zonotopes are geometrically more expressive than real zonotopes, as they can be Minkowski sum of some embedded ellipses in addition to line segments.   They can capture the contraction of of a set along the eigenvectors of the dynamics as stated in Theorem~\ref{thm:eig}.
 %
 \begin{definition}
 Let ${ P\in\cnums^{\rows{P}\times\cols{P}} }$ be a complex matrix, ${c\in\reals^{\rows{P}}}$ be a real vector and $s\in\reals^{\cols{P}}_{\geq 0}$ be a non-negative real vector. The following is a complex zonotope centered at $c$ with template $P$ and scale vector $s$.%
@@ -34,7 +34,7 @@ Let us consider a complex zonotope $\cz{P}{c}{s}$ and a real matrix $A$.  Then t
 The lemma is proved in~\cite{adimoolam2018calculus}.
 \end{proof}
 %
-The algorithm we propose later to stabilize the system involves checking inclusion of a set of complex zonotopes, obtained by applying a sequence of transformations, inside another original complex zonotope (see Lemma~\ref{lem:invstability}).  In this regard, we define a set of complex zonotopes whose templates lie in the neighborhood of a given template as follows.  Let us consider a real matrix with positive entries $\Upsilon\in\reals_{\geq 0}^{\rows{Q}\times\cols{Q}}$ where $Q$ is a complex matrix and a real vector $\rho\in\reals^{\cols{e}}$ where $e$ is a real vector.  Then we use the following notation.
+The algorithm we propose later to stabilize the system involves checking inclusion of a set of complex zonotopes, obtained by applying a sequence of transformations, inside another original complex zonotope (see Lemma~\ref{lem:invstability}).  In this regard, we define a set of complex zonotopes whose templates lie in the neighborhood of a given template as follows.  Let us consider a complex matrix $Q$, a real matrix with positive entries $\Upsilon\in\reals_{\geq 0}^{\rows{Q}\times\cols{Q}}$ and a real vector $\rho\in\reals^{\cols{e}}$ where $e$ is a real vector.  Then we use the following notation.
 %
 \begin{align*}
     & Q\errplus\Upsilon = \set{Q+\widehat{Q}\st{\abs{Q}\leq \Upsilon}},~~e\errplus\Upsilon = \set{e+u\st{\abs{u}\leq \rho}}\\
@@ -94,6 +94,10 @@ We derive the following for any $i\in\set{1,\ldots, \rows{X}}$
  &   \abs{X\alpha + \pinv{P}\widehat{Q}\diag{r}\alpha + y +\pinv{P}u}_i\\
  & \leq \abs{y}_i + \abs{\pinv{P}}\abs{u}  \\
  & ~~~~+ \sum_{j=1}^{\cols{X}} \rb{\abs{X}_{ij}+\rb{\abs{\pinv{P}}\abs{\widehat{Q}}\diag{r}}_{ij}}\abs{\alpha}_j\\
+ &~\text{\% as $\abs{\alpha}_j\leq 1$, $\abs{\widehat{Q}}\leq \Upsilon$, $\abs{u}\leq \rho$  }\\
+ & \leq \abs{y}_i + \abs{\pinv{P}}\rho  \\
+ & ~~~~+ \sum_{j=1}^{\cols{X}} \rb{\abs{X}_{ij}+\rb{\abs{\pinv{P}}\Upsilon\diag{r}}_{ij}}\\ 
+ & \text{\% using (\ref{eqn:inc1})-(\ref{eqn:inc2})}\\
  & \leq \abs{y}_i + \delta_i + \sum_{j=1}^{\cols{X}}\abs{X}_{ij}+\Delta_{ij}\\
      & \leq s_i.~\numberthis\label{proof:inc:bound}
 \end{align*}
@@ -104,6 +108,6 @@ From \eqref{proof:inc:exp} and \eqref{proof:inc:bound}, we get that $x\in\cz{P}{
 \end{proof}
 %
 \begin{remark}~\label{rem:convex}
-For fixed $P$, $Q$ and $\Upsilon$, the Equations~\ref{eqn:inc1}-\ref{eqn:inc2} define convex constraints on $s$.  In fact, the inequalities can be recast as a set of second order conic constraints on $s$ and the remaining variables.  
+For fixed $P$, $Q$ and $\Upsilon$, the Equations~(\ref{eqn:inc1})-(\ref{eqn:inc2}) define convex constraints on $s$.  In fact, the inequalities can be recast as a set of second order conic constraints on $s$ and the remaining variables.  
 Similarly, for fixed $s$, the equations define convex constraints on $P$, $Q$, and $\Upsilon$.
 \end{remark}

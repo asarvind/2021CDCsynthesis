@@ -1,4 +1,4 @@
-For deriving the sufficient condition to establish stabilization in Theorem~\ref{thm:main}, we use a bound on $\R{t+\delta}$ for $0\leq \delta\leq \epsilon$ state in the following lemma.
+For deriving the sufficient condition to establish stabilization in Theorem~\ref{thm:main}, we use a bound on $\R{t+\delta}$ for $0\leq \delta\leq \epsilon$ given in the following lemma borrowed from ~\cite{hetel2013stabilization}.
 %
 \begin{lemma}[~\cite{hetel2013stabilization}~]~\label{lem:convhull}
 Let $L_0,L_1,...,L_r$ be a finite sequence of real matrices and $U_j\rb{\delta}= \sum_{i=1}^j L_i\delta^i$.  If $0\leq \delta<\epsilon$, then $U_r\rb{\delta} \in \conv{U_{0}\rb{\epsilon},\ldots,U_r\rb{\epsilon}}$.
@@ -7,7 +7,7 @@ Let $L_0,L_1,...,L_r$ be a finite sequence of real matrices and $U_j\rb{\delta}=
 This lemma is proved in~\cite{hetel2007lmi}.
 \end{proof}
 %
-The following theorem contains the sufficient conditions for stabilization of the system, which are derived based on the   operations on a complex zonotope described earlier and the above Lemma~\ref{lem:convhull}.  We shall latter discuss the procedure to solve the conditions and find $F_p, \theta$.
+The following theorem contains the sufficient conditions for stabilization of the system, which are derived based on the   operations on a complex zonotope described earlier and the above Lemma~\ref{lem:convhull}.  Latter, we will discuss the procedure to solve these constraints and find $F_p, \theta$.
 %
 \begin{theorem}~\label{thm:main}
 Let us consider a complex matrix $P\in\cnums^{(n+m)\times l}$ and $\epsilon>0$.  The system is $\lambda$-exponentially stable if there exists $s\in\reals^{n}_{\geq 0}$ such that all of the following is true.
@@ -45,7 +45,7 @@ Then based on Lemma~\ref{lem:convhull} and Equations~\ref{eqn:action1},\ref{eqn:
 \R{t}P \subseteq &  \conv{\rb{M_i\myempty H\myempty L}, \rb{\overline{M}_i\myempty H\myempty L}} \\
  & \errplus \rb{\absolute{M_i}\absolute{A_c}\frac{\epsilon^2}{2}\abs{H\myempty L}}.
 \end{align*}
-Similarly, if $i\myempty\epsilon<\theta$, we get \\ $\R{t}P\subseteq \conv{M_iP, \overline{M}_iP}\errplus \rb{\absolute{M_i}\absolute{A_c}\frac{\epsilon^2}{2}\absolute{P}}$.  Then by Equations~(\ref{eqn:incbegin}-\ref{eqn:incend}) and Lemma~\ref{lem:linsum}, we get that $\forall t\in\sqb{\lb,\ub}$, $\R{t}\cz{P}{0}{s}\subseteq \lambda\cz{P}{0}{s}$.  Furthermore by~(\ref{eqn:incunitbox}), we get that $\ball{0}{1}\subseteq \cz{P}{0}{s}$.   Therefore, by Lemma~\ref{lem:invstability}, we get that the system is $\lambda$-exponentially stable.
+Similarly, if $i\myempty\epsilon<\theta$, we get \\ $\R{t}P\subseteq \conv{M_iP, \overline{M}_iP}\errplus \rb{\absolute{M_i}\absolute{A_c}\frac{\epsilon^2}{2}\absolute{P}}$.  Then by Equations~(\ref{eqn:incbegin}-\ref{eqn:incend}) and Lemma~\ref{lem:linsum}, we get that $\forall t\in\sqb{\lb,\ub}$, $\R{t}\real{\cz{P}{0}{s}}\subseteq \lambda\real{\cz{P}{0}{s}}$.  Furthermore by~(\ref{eqn:incunitbox}), we get that $\ball{0}{1}\subseteq \real{\cz{P}{0}{s}}$.   Therefore, by Lemma~\ref{lem:invstability}, taking the $\psi = \real{\cz{P}{c}{s}}$ we get that the system is $\lambda$-exponentially stable.
 \end{proof}
 %
 \begin{algorithm}[h!]
@@ -57,7 +57,7 @@ Choose $\eta>0$ $~\%$ threshold accuracy of line search.
 
 Choose $\gamma>0$  $~\%$ bound on norm of $F_p$.
 
-$\theta_{\min} \gets {\lb}$, $\theta_{\max} \gets \theta_{\min}+\epsilon$, $\theta \gets \theta_{\max}$.
+$\theta_{\min} \gets {\lb}$, $\theta_{\max} \gets \ub$, $\theta \gets \rb{\theta_{\max}+\theta_{\min}}/2$.
 
 $Feasible\gets~false$.
 
@@ -139,5 +139,5 @@ For any $\theta$, we fix the template $P$ of the complex zonotope as the concate
 P = E\rb{\theta,K} = \mymatrix{\eig\rb{\R{\rb{\lb+i\rb{\theta-\lb}/{K}}}}}_{i=0}^K
 \]
 %
-For this fixed $P$ containing above eigenvectors, we can solve for scale vector $s$ by solving only Equations~(\ref{eqn:incunitbox}-\ref{eqn:incmid1}) (ignoring rest) using convex optimization (see Remark~\ref{rem:convex}).  Still, we need to find a suitable $\theta$.  As $\theta$ is a scalar, we can find the largest possible value of $\theta$ such that Equations~(\ref{eqn:incunitbox}-\ref{eqn:incmid1}) are solvable for $P =  E\rb{\theta,K}$ using a line search with iterative convex optimization, as described in Algorithm~\ref{alg:main}.   Next, we fix $s$, $\theta$ and $P = E\rb{\theta,K}$ found by the above procedure, and  solve remaining Equations~(\ref{eqn:incmid2}-\ref{eqn:incend}), while also bounding the norm of $F_p$ being searched, using convex optimization.  The overall procedure is described in Algorithm~\ref{alg:main}.
+We also choose a small value for the $\epsilon>0$.   For this fixed $P$ containing above eigenvectors and $\epsilon>0$, we can solve for scale vector $s$ by solving only Equations~(\ref{eqn:incunitbox}-\ref{eqn:incmid1}) (ignoring rest) using convex optimization (see Remark~\ref{rem:convex}).  Still, we need to find a suitable $\theta$.  As $\theta$ is a scalar, we can find the largest possible value of $\theta$ such that Equations~(\ref{eqn:incunitbox}-\ref{eqn:incmid1}) are solvable for $P =  E\rb{\theta,K}$ using a line search with iterative convex optimization, as described in Algorithm~\ref{alg:main}.   Next, we fix the $s$, $\theta$ and $P = E\rb{\theta,K}$ that are found by the above procedure, and  solve remaining Equations~(\ref{eqn:incmid2}-\ref{eqn:incend}), while also bounding the norm of $F_p$ being searched, using convex optimization.  The overall procedure is described in Algorithm~\ref{alg:main}.
 %
