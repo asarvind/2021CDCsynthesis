@@ -1,10 +1,12 @@
-Sampled data systems are prone to loss of information which can result
-in subsequent inactuation and instability of the system.  In this
-case, we may expect to stabilize the system by applying feedback based
+Sampled data systems are systems where the feedback input is periodically sampled based on information received about the state of the system, typically over a communication network.  They can be used to control distributed components of a system via communication networks.  But communication networks are prone to loss of information, which can result
+in subsequent inactuation and instability of a sampled data system.  In the case of information loss,
+we may expect to stabilize the system by applying feedback based
 on information from previous samples.  However, the sampling time can
 be uncertain and time varying in realistic systems, due to which the
 problem of finding appropriate stabilizing feedback based on the
-previous sample becomes challenging.  For instance, the expected
+previous sample becomes challenging.  
+
+For instance, the expected
 feedback at the current time instant can be written as a function of
 the previous sample (see Remark~\ref{rem:counterintuitive}).  But
 counterintuitively, such feedback may not effectively stabilize the
