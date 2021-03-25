@@ -1,10 +1,15 @@
-Sampled data systems are systems where the feedback input is periodically sampled based on information received about the state of the system, typically over a communication network.  They can be used to control distributed components of a system via communication networks.  But communication networks are prone to loss of information, which can result
-in subsequent inactuation and instability of a sampled data system.  In the case of information loss,
-we may expect to stabilize the system by applying feedback based
+Sampled data systems are systems where the feedback input is
+periodically sampled based on information received about the state of
+the system, typically over a communication network.  They can be used
+to control distributed components of a system by communicating state information.
+But communication networks are prone to loss of
+information, which can result in subsequent inactuation and
+instability of a sampled data system.  In the case of information
+loss, we may expect to stabilize the system by applying feedback based
 on information from previous samples.  However, the sampling time can
 be uncertain and time varying in realistic systems, due to which the
 problem of finding appropriate stabilizing feedback based on the
-previous sample becomes challenging.  
+previous sample becomes challenging.
 
 For instance, the expected
 feedback at the current time instant can be written as a function of
@@ -24,7 +29,7 @@ time in uncertain, has not been tacked yet.
 
 In this paper, we come up with an algorithm to find the
 stabilizing feedback based on previous sample when the current sample
-information is missing and the sampling time is uncertain.  To this
+information is missing and also the sampling time is uncertain.  To this
 end, we find a novel application of a set representation called
 \emph{complex zonotope}~\cite{adimoolam2018calculus}.  Complex
 zonotope is an extension of real valued zonotopes to complex plane
