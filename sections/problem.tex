@@ -35,7 +35,7 @@ The system is said to be $\lambda$-exponentially stable for $\lambda\in[0,1)$ if
 We are given $\lambda\in[0,1)$, $\lb$, $\ub$, $A_s$, $B_s$, $A_u$, $B_u$ and $F_c$ such that the matrix $\R{\lb}$ is Schur.  Find a feedback matrix  $F_p\in\reals^{m\times\rb{n+m}}$ acting on the previous sample and input and also find a $\theta\in\sqb{\rb{\ub+\lb}/2, \ub}$ such that the system is $\lambda$-exponentially stable.
 \end{problem}
 %
-\begin{remark}~\label{rem:counterintuitive}  Let us consider that a system is be stable for sampling times between $\sqb{\lb,\lb+\mu}$ without the previous sample based feedback.  The expected sampling time feedback at a time $\rb{t_k+\mu}$ is ${F_c\state{\rb{t_k+\mu}}}$.  As a function of the previous sample $\state{t_k}$, this feedback is $F_c\exp\rb{A_c\rb{\lb+\mu}}\state{t_k}$.  So, when the sample information is missing at $\rb{t_k+\lb+\mu}$, it may seem intuitive to apply feedback $F_c\exp\rb{A_c\rb{\lb+\mu}}\state{t_k}$ at $\rb{\lb+\mu}$ to stabilize the system for a larger $\ub>\lb+\mu$.   However, counterintuitively, this may not provide stabilization for a large enough $\ub$ but other values of $F_p$ may lead to far more robust stabilization, as illustrated in the below example.  
+\begin{remark}~\label{rem:counterintuitive}  Let us consider that a system is stable for sampling times between $\sqb{\lb,\lb+\mu}$ without the previous sample based feedback.  The expected sampling time feedback at a time $\rb{t_k+\mu}$ is ${F_c\state{\rb{t_k+\mu}}}$.  As a function of the previous sample $\state{t_k}$, this feedback can be written as $F_c\exp\rb{A_c\rb{\lb+\mu}}\state{t_k}$.  So, when the sample information is missing at $\rb{t_k+\lb+\mu}$, it may seem intuitive to apply feedback $F_c\exp\rb{A_c\rb{\lb+\mu}}\state{t_k}$ at $\rb{\lb+\mu}$ to stabilize the system for a larger $\ub>\lb+\mu$.   However, counterintuitively, this may not provide stabilization for a large enough $\ub$ but other values of $F_p$ may lead to far more robust stabilization, as illustrated in the below example.  
 \end{remark}
 %
 \begin{example}~\label{eg:counterintuitive}
@@ -46,8 +46,8 @@ shown this system is stable for sampling times in $\sqb{0.4,1.888}$,
 but unstable for $\ub\geq 1.889$.  If we set a matching feedback
 matrix $F_p = F_s\exp\rb{1.888A_c}$ acting on previous sample at
 sampling time $1.888$ where $\theta = 1.488$, the system will be
-unstable for $\ub\geq 2.0888$.  This is because $\R{0.4}\R{2.088} =
-A_r\exp\rb{0.4A_c}A_r\exp\rb{1.888 A_c}A_r\exp\rb{0.2 A_c}$ has
+unstable for $\ub\geq 1.898$, which is a very small increment $(0.01)$ than the previous stability threshold $1.888$.  This is because $\R{0.4}\R{1.898} =
+A_r\exp\rb{0.4A_c}A_r\exp\rb{0.01 A_c}A_r\exp\rb{1.888 A_c}$ has
 eigenvalues outside unit complex circle.  Instead, if we take $F_p
 = \mymatrix{0.1422 & 0.4669 & 0.1417}$ with $\theta = 0.41$, we can
 stabilize the system for a far larger value $\ub = 3.42$, which we
@@ -58,4 +58,4 @@ no guarantee that such feedback will stabilize the system for a larger
 $\ub>\lb+\mu$.
 \end{example}
 
-Instead, we shall describe a stabilization method using complex zonotopes, which stabilizes the system for large uncertainties in the sampling period on benchmark examples.
+Alternatively, we shall describe a stabilization method using complex zonotopes, which stabilizes the system for large uncertainties in the sampling period on benchmark examples.
