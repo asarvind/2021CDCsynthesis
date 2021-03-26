@@ -16,10 +16,10 @@ Let us denote $r = \max_{z\in\Psi}\norm{z}$ which is finite as considered in the
 Then we get $\norm{\cs{k}}\leq \norm{\cs{0}}\lambda^k\max_{z\in\Psi}\norm{z} = r\norm{\cs{0}}\lambda^k$.  As this $r$ is constant for all initial states $\cs{0}$, we get that the system is $\lambda$-exponentially stable.
 \end{proof}
 %
-Therefore, to stabilize the system, we can find an $F_p$, $\theta$ and a set $\Psi$ satisfying the conditions of Lemma~\ref{lem:invstability}.  The choice of the set $\Psi$ affects the robustness of our solution, i.e., the $\ub$ for which stabilization can be achieved.  It has been previously shown that using the eigenstructure of the system dynamics inside a set representation called complex zonotope~\cite{adimoolam2016using}, stability can be verified for larger ranges of $\ub$ on benchmark examples than other set methods.  So, in this paper, our choice for the $\Psi$ is a complex zonotope and we extend its application to stabilize the system, i.e. find $F_p$ and $\theta$.  Firstly, we discuss necessary operations on a complex zonotope in the following section.
+Therefore, to stabilize the system, we can find an $F_p$, $\theta$ and a set $\Psi$ satisfying the conditions of Lemma~\ref{lem:invstability}.  The choice of the set $\Psi$ affects the robustness of our solution, {\em i.e.}, the $\ub$ for which stabilization can be achieved.  It has been previously shown that using the eigenstructure of the system dynamics in a set representation called complex zonotope~\cite{adimoolam2016using}, stability can be verified for larger ranges of $\ub$ on benchmark examples, compared to other set-based methods. Hence, in this paper, our choice for the $\Psi$ is a complex zonotope and we extend its application to stabilize the system, {\em i.e.}, find $F_p$ and $\theta$.  Firstly, we discuss necessary operations on a complex zonotope in the following section.
 %
 \subsection{Complex Zonotope and Set Operations}
 \input{sections/czoperations}
 %
-\subsection{Stabilization using complex zonotope}
+\subsection{Stabilization using complex zonotopes}
 \input{sections/stabilization}
