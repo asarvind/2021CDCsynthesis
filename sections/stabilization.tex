@@ -7,13 +7,14 @@ Let $L_0,L_1,...,L_r$ be a finite sequence of real matrices and $U_j\rb{\delta}=
 This lemma is proved in~\cite{hetel2007lmi}.
 \end{proof}
 %
-The following theorem contains the sufficient conditions for stabilization of the system, which are derived based on the   operations on a complex zonotope described earlier and the above Lemma~\ref{lem:convhull}.  Latter, we will discuss the procedure to solve these constraints and find $F_p, \theta$.
+We introduce a new theorem that contains the sufficient conditions for stabilization of the system, which are derived based on the   operations on a complex zonotope described earlier and the above Lemma~\ref{lem:convhull}.  Latter, we will discuss the procedure to solve these constraints and find $F_p, \theta$.
 %
 \begin{theorem}~\label{thm:main}
 Let us consider a complex matrix $P\in\cnums^{(n+m)\times l}$ and $\epsilon>0$.  The system is $\lambda$-exponentially stable if there exists $s\in\reals^{n}_{\geq 0}$ such that all of the following is true.
 \end{theorem}
 %
 \begin{align*}
+    & \rb{\ub-\lb}/2 \leq \theta \leq \rb{\ub-\lb}~\numberthis\label{eqn:beginmaineqs}\\
     & \cz{\identity{n+m}}{0}{\mymatrix{1 & \dots & 1}^T} \order \cz{P}{0}{s}~\numberthis\label{eqn:incunitbox}\\
     & L = \exp\rb{A_c\rb{\lb+\theta}}P~\numberthis\\
     & H = \mymatrix{\identity{n} ~~~~ 0\\ F_p\exp\rb{-A_c\rb{\lb+\theta}} }~\numberthis\label{eqn:incbegin}\\
@@ -48,6 +49,16 @@ Then based on Lemma~\ref{lem:convhull} and Equations~\ref{eqn:action1},\ref{eqn:
 Similarly, if $i\myempty\epsilon<\theta$, we get \\ $\R{t}P\subseteq \conv{M_iP, \overline{M}_iP}\errplus \rb{\absolute{M_i}\absolute{A_c}\frac{\epsilon^2}{2}\absolute{P}}$.  Then by Equations~(\ref{eqn:incbegin}-\ref{eqn:incend}) and Lemma~\ref{lem:linsum}, we get that $\forall t\in\sqb{\lb,\ub}$, $\R{t}\real{\cz{P}{0}{s}}\subseteq \lambda\real{\cz{P}{0}{s}}$.  Furthermore by~(\ref{eqn:incunitbox}), we get that $\ball{0}{1}\subseteq \real{\cz{P}{0}{s}}$.   Therefore, by Lemma~\ref{lem:invstability}, taking the $\psi = \real{\cz{P}{c}{s}}$ we get that the system is $\lambda$-exponentially stable.
 \end{proof}
 %
+\begin{remark}~\label{rem:convex}
+For fixed $P$ and $\theta$, the
+equations~(\ref{eqn:incunitbox})-(\ref{eqn:incmid1}) (ignoring rest)
+define convex constraints on $s$.  In fact, the inequalities can be
+recast as a set of second order conic constraints on $s$ and some
+other auxillary variables.  Similarly, for fixed $s$, $P$ and
+$\theta$, the equations~(\ref{eqn:incmid2})-(\ref{eqn:incend}) define
+convex constraints on the feedback matrix $F_p$.
+\end{remark}
+%
 \begin{algorithm}[h!]
 \caption{Algorithm to solve for $F_p$ and $\theta$}\label{alg:main}
 
@@ -57,7 +68,7 @@ Choose $\eta>0$ $~\%$ threshold accuracy of line search.
 
 Choose $\gamma>0$  $~\%$ bound on norm of $F_p$.
 
-$\theta_{\min} \gets {\lb}$, $\theta_{\max} \gets \ub$, $\theta \gets \rb{\theta_{\max}+\theta_{\min}}/2$.
+$\theta_{\min} \gets \rb{\ub-\lb}/2$, $\theta_{\max} \gets \rb{\ub-\lb}$, $\theta \gets \rb{\theta_{\max}+\theta_{\min}}/2$.
 
 $Feasible\gets~false$.
 
@@ -117,7 +128,7 @@ $B_s = \mymatrix{0 & 0\\ 0 & 0\\ 1 & 0\\ 0 & 0\\ 0 & 0\\ 0 & 1\\ 0 &
 0\\ 0 & 0\\ 0 & 0}$, $A_u = 0$, $B_u = 0$
 \\
 $F_c = \mymatrix{0 & 0 & 0 & -0.8198 & 0.4270 & -0.0450 & -0.1942 &
-0.3626 v -0.0946\\ 0.8718 & 3.8140 & -0.0754 & 0 & 0 & 0 & -0.5950 &
+0.3626 & -0.0946\\ 0.8718 & 3.8140 & -0.0754 & 0 & 0 & 0 & -0.5950 &
 0.1294 & -0.0796}$.
 \caption{Matrices of dynamics for Example~\ref{eg:net}}
 \label{tab:mats}
@@ -131,7 +142,7 @@ $F_p = \mymatrix{-0.0194 & 0.0030 & 0.0164 & -0.1402 & -0.0089 & 0.0018 & 0.0090
 \label{tab:res-net}
 \end{table*}
 
-The above Theorem~\ref{thm:main} defines sufficient conditions for exponential stability of the system.  For given $\lambda\in[0,1)$, $\lb$, $\ub$, $A_s$, $B_s$, $A_u$, $B_u$ and $F_c$, we can find $F_p$ and $\theta$ as solutions to the above Equations~(\ref{eqn:incunitbox}-\ref{eqn:incend}).  In particular, we may restict the norm of $F_p$ because larger norm correlates with higher energy.  However, the above constraints~(\ref{eqn:incunitbox}-\ref{eqn:incend}) can not be solved by straightforward convex optimization because considering all the variables $F_p$, $s$, $P$ and $\theta$, the constraints are non-convex.  Instead, we use the following procedure.
+The above Theorem~\ref{thm:main} defines sufficient conditions for exponential stability of the system.  For given $\lambda\in[0,1)$, $\lb$, $\ub$, $A_s$, $B_s$, $A_u$, $B_u$ and $F_c$, we can find $F_p$ and $\theta$ as solutions to the above Equations~(\ref{eqn:incunitbox}-\ref{eqn:incend}).  In particular, we may restict the norm of $F_p$ because larger norm correlates with higher energy.  However, all the above constraints together~(\ref{eqn:incunitbox}-\ref{eqn:incend}) can not be solved by straightforward convex optimization because considering all the variables $F_p$, $s$, $P$ and $\theta$, the constraints are non-convex.  Instead, we use a new procedure, which extends the stability verification method discussed earlier in~\cite{adimoolam2017template, adimoolam2016using} to synthesize values of $\theta$ and $F_p$.
 
 For any $\theta$, we fix the template $P$ of the complex zonotope as the concatenation of column eigenvectors of $R_t$ for different values of $t\in\sqb{\lb,\theta}$.  The reason is, Theorem~\ref{thm:eig} indicates that using eigenvectors of the dynamics as generators can represent contractive complex zonotope.  Henceforth, we sample the eigenvectors of $K+1$ different operators for a chosen $K\in\integers_{\geq 2}$ as follows.
 %
@@ -139,5 +150,7 @@ For any $\theta$, we fix the template $P$ of the complex zonotope as the concate
 P = E\rb{\theta,K} = \mymatrix{\eig\rb{\R{\rb{\lb+i\rb{\theta-\lb}/{K}}}}}_{i=0}^K
 \]
 %
-We also choose a small value for the $\epsilon>0$.   For this fixed $P$ containing above eigenvectors and $\epsilon>0$, we can solve for scale vector $s$ by solving only Equations~(\ref{eqn:incunitbox}-\ref{eqn:incmid1}) (ignoring rest) using convex optimization (see Remark~\ref{rem:convex}).  Still, we need to find a suitable $\theta$.  As $\theta$ is a scalar, we can find the largest possible value of $\theta$ such that Equations~(\ref{eqn:incunitbox}-\ref{eqn:incmid1}) are solvable for $P =  E\rb{\theta,K}$ using a line search with iterative convex optimization, as described in Algorithm~\ref{alg:main}.   Next, we fix the $s$, $\theta$ and $P = E\rb{\theta,K}$ that are found by the above procedure, and  solve remaining the equations~(\ref{eqn:incmid2}-\ref{eqn:incend}), while also bounding the norm of $F_p$ being searched, using convex optimization.  The overall procedure is described in Algorithm~\ref{alg:main}.
+We also choose a small value for the $\epsilon>0$.   For this fixed $P$ containing above eigenvectors and $\epsilon>0$, we can solve for scale vector $s$ by solving only Equations~(\ref{eqn:incunitbox}-\ref{eqn:incmid1}) (ignoring rest) using convex optimization (see Remark~\ref{rem:convex}).  Still, we need to find a suitable $\theta$.
+
+The new extension proposed in this paper is the following.  As $\theta$ is a scalar, we can find the largest possible value of $\theta$ such that Equations~(\ref{eqn:incunitbox}-\ref{eqn:incmid1}) are solvable for $P =  E\rb{\theta,K}$ using a line search with iterative convex optimization, as described in Algorithm~\ref{alg:main}.   Next, we fix the $s$, $\theta$ and $P = E\rb{\theta,K}$ that are found by the above procedure, and  solve remaining the equations~(\ref{eqn:incmid2}-\ref{eqn:incend}), while also bounding the norm of $F_p$ being searched, using convex optimization.  The overall procedure is described in Algorithm~\ref{alg:main}.
 %

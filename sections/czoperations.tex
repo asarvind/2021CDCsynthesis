@@ -8,7 +8,7 @@ Let ${ P\in\cnums^{\rows{P}\times\cols{P}} }$ be a complex matrix, ${c\in\reals^
 %
 \end{definition}
 %
-The following theorem illustrates the relation between the eigenstructure of the system and finding contractive complex zonotopes.
+The following theorem, which was previously discussed in~\cite{adimoolam2016using,adimoolam2017template} illustrates the relation between the eigenstructure of the system and finding contractive complex zonotopes.
 %
 \begin{theorem}~\label{thm:eig}
 Let a complex matrix $P$ contain the eigenvectors of $\R{t}$ for some $t$.  If the eigenvalues of $\R{t}$ are all less than $\lambda$, then $\R{t}\cz{P}{0}{s}\subseteq \lambda\cz{P}{0}{s}$ for all $s\in\reals_{\geq 0}$.
@@ -42,7 +42,7 @@ The algorithm we propose later to stabilize the system involves checking inclusi
     & = \set{\cz{Q+\widehat{Q}}{e+u}{r}~\st{\abs{\widehat{Q}}\leq \Upsilon,~\abs{u}\leq \rho}}
 \end{align*}
 %
-The following relation is a sufficient condition for checking the required inclusion which is proved later in Lemma~\ref{lem:inclusion}.  The following Lemma~\ref{lem:inclusion} is an extension of the inclusion checking between two complex zonotopes proved in~\cite{adimoolam2018calculus} (see Theorem 2.3.8).
+The following new relation introduced in this paper is a sufficient condition for checking the inclusion of the above set of complex zonotopes inside a complex zonotope, which is proved later in Lemma~\ref{lem:inclusion}.  It is an extension of the inclusion checking between two complex zonotopes discussed in~\cite{adimoolam2018calculus} (see Theorem 2.3.8) to check inclusion of the above set of complex zonotopes inside a complex zonotope.
 %
 \begin{definition}~\label{defn:inc}  Let $P$ be a complex matrix such that $P^T P$ is a square invertible matrix.  Let $\Upsilon>0$ be a real matrix with only positive elements.  We define the relation \[ \cz{Q\errplus \Upsilon}{e\errplus\rho}{r} \order \cz{P}{c}{s}\] if all of the following conditions are verified:
 %
@@ -107,7 +107,4 @@ The above second inequality is true because $\abs{\alpha}\leq 1$, $\abs{\widehat
 From \eqref{proof:inc:exp} and \eqref{proof:inc:bound}, we get that $x\in\cz{P}{c}{s}$.  As this is true for any $x\in\cz{Q}{e}{r}$, the inclusion $\cz{Q}{e}{r}\subseteq \cz{P}{c}{s}$ is true.  
 \end{proof}
 %
-\begin{remark}~\label{rem:convex}
-For fixed $P$, $Q$ and $\Upsilon$, the equations~(\ref{eqn:inc1})-(\ref{eqn:inc2}) define convex constraints on $s$.  In fact, the inequalities can be recast as a set of second order conic constraints on $s$ and the remaining variables.  
-Similarly, for fixed $s$, the equations define convex constraints on $P$, $Q$, and $\Upsilon$.
-\end{remark}
+
